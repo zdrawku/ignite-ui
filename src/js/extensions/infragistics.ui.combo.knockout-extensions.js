@@ -155,15 +155,17 @@
 
             if (dataSource) {
                 for (i = 0; i < $comboList.length; i++) {
-                    ko.applyBindingsToNode($comboList[ i ], {
-                        igComboItem: {
-                            combo: combo,
-                            value: dataSource[ i ],
-                            index: i,
-                            options: options
-                        }
-                    }, dataSource[ i ]);
-                }
+					if (ko.isObservable($comboList[ i ])) {
+						ko.applyBindingsToNode($comboList[ i ], {
+							igComboItem: {
+								combo: combo,
+								value: dataSource[ i ],
+								index: i,
+								options: options
+							}
+						}, dataSource[ i ]);
+					}
+				}
             }
         },
         update: function (element, valueAccessor) {
@@ -178,14 +180,16 @@
                     $comboList = combo.igCombo("listItems");
                     if (dataSource) {
                         for (i = 0; i < $comboList.length; i++) {
-                            ko.applyBindingsToNode($comboList[ i ], {
-                                igComboItem: {
-                                    combo: combo,
-                                    value: dataSource[ i ],
-                                    index: i,
-                                    options: options
-                                }
-                            }, dataSource[ i ]);
+							if (ko.isObservable($comboList[ i ])) {
+								ko.applyBindingsToNode($comboList[ i ], {
+									igComboItem: {
+										combo: combo,
+										value: dataSource[ i ],
+										index: i,
+										options: options
+									}
+								}, dataSource[ i ]);
+							}
                         }
                     }
                     selectItems(combo, valueAccessor().selectedItems);
